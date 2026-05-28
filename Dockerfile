@@ -1,19 +1,11 @@
-# --- ステージ1: JavaコードをコンパイルしてWARファイルを作る（Mavenビルド） ---
-FROM maven:3.8.8-eclipse-temurin-17 AS build
-WORKDIR /app
-
-# プロジェクトの全ファイルをコピー
-COPY . .
-
-# ディレクトリを移動してMavenビルドを実行 (テストはスキップ)
-# ※GitHubのトップにMafiaDiagnosisフォルダがあるため、そこに移動してビルドします
-RUN cd MafiaDiagnosis && mvn clean package -DskipTests
-
-# --- ステージ2: 作成したWARファイルをTomcatに載せて起動する ---
+# 実行環境としてTomcat10を使用
 FROM tomcat:10.1-jdk17-temurin
+
+# 最初から入っている不要な初期アプリを削除
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# ステージ1で作ったWARファイルを、TomcatのROOT.warとしてコピー
-COPY --from=build /app/MafiaDiagnosis/target/*.war /usr/local/tomcat/webapps/ROOT.war
+# Eclipseでエクスポートした「ROOT.war」を、Tomcatのwebappsフォルダにコピー
+COPY ./ROOT.war /usr/local/tomcat/webapps/
 
+EXPOSE 8080
 CMD ["catalina.sh", "run"]
