@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<title>マフィア組織適性診断</title>
+	<style>
+		body {
+			background-color: #1a1a1a;
+			color: #fff;
+			font-family: sans-serif;
+			text-align: center;
+			padding-top: 100px;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 2px solid #daa520;
+			background-color: #262626;
+		}
+
+		h1 {
+			color: #ff3333;
+			font-size: 2em;
+			letter-spacing: 2px;
+		}
+
+		.btn {
+			display: inline-block;
+			background-color: #8b0000;
+			color: white;
+			padding: 15px 30px;
+			text-decoration: none;
+			font-weight: bold;
+			border-radius: 5px;
+			margin-top: 30px;
+			border: none;
+			cursor: pointer;
+		}
+
+		.btn:hover {
+			background-color: #ff3333;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>UNDERGROUND DIAGNOSIS</h1>
+		<p>〜 組織適性診断 〜</p>
+		<p>いくつかの質問から、あなたの裏の顔と、組織でのポジションを暴き出します。</p>
+
+		<form action="DiagnosisServlet" method="POST">
+			<input type="hidden" name="qNum" value="0">
+			<button type="submit" class="btn">診断開始</button>
+		</form>
+	</div>
+</body>
+
+</html>
